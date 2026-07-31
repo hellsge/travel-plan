@@ -310,6 +310,7 @@ def render_html(title: str, sheet_name: str, start_day: date | None, end_day: da
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="旅行计划">
+<meta name="travel-version" content="{{VERSION}}">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -403,10 +404,17 @@ def render_html(title: str, sheet_name: str, start_day: date | None, end_day: da
     window.addEventListener('load',async()=>{{
       try{{
         const registration=await navigator.serviceWorker.register('./service-worker.js');let refreshing=false;
+        const pageVersion=document.querySelector('meta[name="travel-version"]')?.content||'';
         const showUpdate=worker=>{{
           if(!worker||!navigator.serviceWorker.controller)return;
-          const toast=document.getElementById('updateToast');toast.hidden=false;
-          document.getElementById('reloadApp').onclick=()=>worker.postMessage({{type:'SKIP_WAITING'}});
+          const channel=new MessageChannel();
+          channel.port1.onmessage=event=>{{
+            if(event.data&&event.data.version!==pageVersion){{
+              const toast=document.getElementById('updateToast');toast.hidden=false;
+              document.getElementById('reloadApp').onclick=()=>worker.postMessage({{type:'SKIP_WAITING'}});
+            }}
+          }};
+          worker.postMessage({{type:'GET_VERSION'}},[channel.port2]);
         }};
         if(registration.waiting)showUpdate(registration.waiting);
         registration.addEventListener('updatefound',()=>{{const worker=registration.installing;worker.addEventListener('statechange',()=>{{if(worker.state==='installed')showUpdate(worker)}})}});
@@ -510,6 +518,7 @@ def write_pwa_files(output_dir: Path, title: str, html_filename: str, content_ve
         "./icons/apple-touch-icon.png",
     ]
     service_worker = f'''const CACHE_NAME = {json.dumps(cache_name)};
+const VERSION = {json.dumps(content_version)};
 const ASSETS = {json.dumps(assets, ensure_ascii=False, indent=2)};
 
 self.addEventListener('install', event => {{
@@ -518,6 +527,9 @@ self.addEventListener('install', event => {{
 
 self.addEventListener('message', event => {{
   if (event.data && event.data.type === 'SKIP_WAITING') self.skipWaiting();
+  if (event.data && event.data.type === 'GET_VERSION' && event.ports && event.ports[0]) {{
+    event.ports[0].postMessage({{version: VERSION}});
+  }}
 }});
 
 self.addEventListener('activate', event => {{
@@ -544,8 +556,9 @@ def generate(workbook_path: Path, sheet_name: str, output_path: Path) -> None:
     title, start_day, end_day, days = read_trip(workbook_path, sheet_name)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     document = render_html(title, sheet_name, start_day, end_day, days)
-    output_path.write_text(document, encoding="utf-8")
     content_version = hashlib.sha256(document.encode("utf-8")).hexdigest()[:12]
+    document = document.replace("{VERSION}", content_version)
+    output_path.write_text(document, encoding="utf-8")
     write_pwa_files(output_path.parent, title, output_path.name, content_version)
     item_count = sum(len(day.items) for day in days)
     print(f"已生成 PWA：{output_path}（{len(days)} 天，{item_count} 项）")
