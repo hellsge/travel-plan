@@ -330,6 +330,7 @@ def render_html(title: str, sheet_name: str, start_day: date | None, end_day: da
 <div id="offlineBadge" class="offline-badge" hidden>当前离线</div>
 <script>
 (()=>{{
+  if(location.search.includes('_t='))history.replaceState(null,'',location.pathname+location.hash);
   const filter=document.getElementById('todoFilter'),empty=document.getElementById('empty');
   filter.addEventListener('click',()=>{{
     const active=filter.classList.toggle('active');
@@ -404,7 +405,7 @@ def render_html(title: str, sheet_name: str, start_day: date | None, end_day: da
     window.addEventListener('load',async()=>{{
       try{{
         const registration=await navigator.serviceWorker.register('./service-worker.js');let refreshing=false;
-        const forceRefresh=()=>{{if(refreshing)return;refreshing=true;caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('travel-')).map(k=>caches.delete(k)))).finally(()=>location.reload())}};
+        const doRefresh=()=>{{if(refreshing)return;refreshing=true;caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('travel-')).map(k=>caches.delete(k)))).then(()=>{{location.replace(location.pathname+'?_t='+Date.now()+location.hash)}}).catch(()=>{{location.replace(location.pathname+'?_t='+Date.now()+location.hash)}})}};
         const pageVersion=document.querySelector('meta[name="travel-version"]')?.content||'';
         const showUpdate=worker=>{{
           if(!worker||!navigator.serviceWorker.controller)return;
@@ -412,14 +413,14 @@ def render_html(title: str, sheet_name: str, start_day: date | None, end_day: da
           channel.port1.onmessage=event=>{{
             if(event.data&&event.data.version!==pageVersion){{
               const toast=document.getElementById('updateToast');toast.hidden=false;
-              document.getElementById('reloadApp').onclick=()=>{{const btn=document.getElementById('reloadApp');btn.disabled=true;btn.textContent='刷新中…';try{{worker.postMessage({{type:'SKIP_WAITING'}})}}catch(e){{}}setTimeout(forceRefresh,2000);}};
+              document.getElementById('reloadApp').onclick=()=>{{const btn=document.getElementById('reloadApp');btn.disabled=true;btn.textContent='刷新中…';try{{worker.postMessage({{type:'SKIP_WAITING'}})}}catch(e){{}}setTimeout(doRefresh,1500);}};
             }}
           }};
           worker.postMessage({{type:'GET_VERSION'}},[channel.port2]);
         }};
         if(registration.waiting)showUpdate(registration.waiting);
         registration.addEventListener('updatefound',()=>{{const worker=registration.installing;worker.addEventListener('statechange',()=>{{if(worker.state==='installed')showUpdate(worker)}})}});
-        navigator.serviceWorker.addEventListener('controllerchange',forceRefresh);
+        navigator.serviceWorker.addEventListener('controllerchange',doRefresh);
         document.addEventListener('visibilitychange',()=>{{if(document.visibilityState==='visible')registration.update()}});
       }}catch(error){{console.warn('离线缓存注册失败',error)}}
     }});
