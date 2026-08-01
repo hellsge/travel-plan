@@ -404,7 +404,7 @@ def render_html(title: str, sheet_name: str, start_day: date | None, end_day: da
   if('serviceWorker' in navigator && location.protocol.startsWith('http')){{
     window.addEventListener('load',async()=>{{
       try{{
-        const registration=await navigator.serviceWorker.register('./service-worker.js');let refreshing=false;
+        const registration=await navigator.serviceWorker.register('./service-worker.js',{{updateViaCache:'none'}});let refreshing=false;
         const doRefresh=()=>{{if(refreshing)return;refreshing=true;location.replace(location.pathname+'?_t='+Date.now()+location.hash)}};
         const pageVersion=document.querySelector('meta[name="travel-version"]')?.content||'';
         const showUpdate=worker=>{{
@@ -413,7 +413,7 @@ def render_html(title: str, sheet_name: str, start_day: date | None, end_day: da
           channel.port1.onmessage=event=>{{
             if(event.data&&event.data.version!==pageVersion&&sessionStorage.getItem('sw-refreshed')!==event.data.version){{
               const toast=document.getElementById('updateToast');toast.hidden=false;
-              document.getElementById('reloadApp').onclick=()=>{{const btn=document.getElementById('reloadApp');btn.disabled=true;btn.textContent='刷新中…';sessionStorage.setItem('sw-refreshed',event.data.version);try{{worker.postMessage({{type:'SKIP_WAITING'}})}}catch(e){{}}setTimeout(doRefresh,500);}};
+              document.getElementById('reloadApp').onclick=()=>{{const btn=document.getElementById('reloadApp');btn.disabled=true;btn.textContent='刷新中…';sessionStorage.setItem('sw-refreshed',event.data.version);try{{(registration.waiting||worker).postMessage({{type:'SKIP_WAITING'}})}}catch(e){{}}setTimeout(doRefresh,500);}};
             }}
           }};
           worker.postMessage({{type:'GET_VERSION'}},[channel.port2]);
