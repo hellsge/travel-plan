@@ -4,7 +4,7 @@
 
 ## 在线地址
 
-**[打开旅行计划](https://travel-plan-d6g5b161mead811a7-1462127694.tcloudbaseapp.com/)**
+**[打开旅行计划](https://hellsge.github.io/travel-plan/)**
 
 ## iPhone 安装
 
@@ -32,10 +32,10 @@ git push
 
 ## 发布平台配置
 
-发布目标由 GitHub 仓库变量 `DEPLOY_TARGET` 决定，在仓库 **Settings → Secrets and variables → Actions → Variables** 中设置：
+发布目标由 GitHub 仓库变量 `DEPLOY_TARGET` 决定，在仓库 **Settings → Secrets and variables → Actions → Variables** 中设置（当前为 `github-pages`）：
 
-- `tencent`：发布到腾讯云 CloudBase 静态托管（默认）
-- `github-pages`：回退到 GitHub Pages
+- `github-pages`：发布到 GitHub Pages（当前默认）
+- `tencent`：发布到腾讯云 CloudBase 静态托管（需按量计费环境）
 - `none`：只构建、不发布
 
 使用腾讯云时，还需在 **Secrets** 中配置：
