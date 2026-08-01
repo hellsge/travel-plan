@@ -2,7 +2,7 @@
 
 ## 项目目标
 
-维护个人旅行计划。Excel 是唯一可信数据源，通过生成脚本自动构建适合 iPhone 浏览和离线使用的 PWA，并由 GitHub Pages 发布；HTML 不作为反向编辑入口。
+维护个人旅行计划。Excel 是唯一可信数据源，通过生成脚本自动构建适合 iPhone 浏览和离线使用的 PWA 并自动发布；HTML 不作为反向编辑入口。
 
 ## 文件与 Sheet 组织
 
@@ -18,10 +18,12 @@
 ## 仓库与发布
 
 - 生成器位于 `scripts/generate_pwa.py`，默认读取“26暑期云南”Sheet，输出到被 Git 忽略的 `output/`。
-- GitHub Actions 工作流位于 `.github/workflows/deploy-pages.yml`；推送 `travel.xlsx`、生成器、依赖或工作流变更到 `main` 后自动构建并发布。
-- 正式访问地址为 <https://hellsge.github.io/travel-plan/>，不保留局域网服务器、临时预览脚本或重复的生成文档。
+- GitHub Actions 工作流位于 `.github/workflows/deploy.yml`；推送 `travel.xlsx`、生成器、依赖或工作流变更到 `main` 后自动构建并发布。
+- 发布目标与仓库解耦，由 GitHub 仓库变量 `DEPLOY_TARGET` 控制：`tencent`（腾讯云 CloudBase 静态托管）、`github-pages`（GitHub Pages 回退）或 `none`（仅构建不发布）。
+- 腾讯云部署所需凭证存放在 GitHub Actions Secrets，不写进仓库：`TENCENT_SECRET_ID`、`TENCENT_SECRET_KEY`（CAM 密钥）、`TENCENT_ENV_ID`（CloudBase 环境 ID）。
+- 正式访问地址为 <https://travel-plan-d6g5b161mead811a7-1462127694.tcloudbaseapp.com/>，不保留局域网服务器、临时预览脚本或重复的生成文档。
 - 发布产物包括 `index.html`、`manifest.webmanifest`、`service-worker.js` 和 `icons/`，均由脚本生成，不提交、不手工编辑。
-- 修改行程后应提交 Excel 并推送，由 GitHub Pages 发布；发布后验证线上页面、PWA 资源及 GitHub Actions 状态。
+- 修改行程后应提交 Excel 并推送，由 CI 自动发布；发布后验证线上页面、PWA 资源及 GitHub Actions 状态。
 - 仓库本地提交身份使用 `hellsge <hellsge@qq.com>`。
 
 ## 新版模板结构

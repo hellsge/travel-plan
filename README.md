@@ -1,10 +1,10 @@
 # 旅行计划
 
-以 [travel.xlsx](travel.xlsx) 为唯一数据源，自动发布“26暑期云南”行程到 GitHub Pages，并支持在 iPhone 上安装为可离线使用的 PWA。
+以 [travel.xlsx](travel.xlsx) 为唯一数据源，自动发布“26暑期云南”行程为可离线使用的 PWA，供 iPhone 浏览。
 
 ## 在线地址
 
-**[打开旅行计划](https://hellsge.github.io/travel-plan/)**
+**[打开旅行计划](https://travel-plan-d6g5b161mead811a7-1462127694.tcloudbaseapp.com/)**
 
 ## iPhone 安装
 
@@ -30,6 +30,24 @@ git push
 1. GitHub Actions 自动读取 Excel、生成 PWA 并发布。
 1. iPhone 联网打开网页 App，看到“行程已有新版本”后点击“立即刷新”。
 
+## 发布平台配置
+
+发布目标由 GitHub 仓库变量 `DEPLOY_TARGET` 决定，在仓库 **Settings → Secrets and variables → Actions → Variables** 中设置：
+
+- `tencent`：发布到腾讯云 CloudBase 静态托管（默认）
+- `github-pages`：回退到 GitHub Pages
+- `none`：只构建、不发布
+
+使用腾讯云时，还需在 **Secrets** 中配置：
+
+| 名称 | 说明 |
+| --- | --- |
+| `TENCENT_SECRET_ID` | 腾讯云 CAM 密钥 SecretId |
+| `TENCENT_SECRET_KEY` | 腾讯云 CAM 密钥 SecretKey |
+| `TENCENT_ENV_ID` | CloudBase 静态托管环境 ID |
+
+配置后，推送 [travel.xlsx](travel.xlsx) 会自动重新构建并发布。
+
 ## 地点和地图
 
 新版模板的 L 列“地点 / 地图关键词”专用于地图搜索。只有填写该列的事项才显示地图操作，路线说明、营业时间等内容继续填写在 F 列“路线 / 备注”。
@@ -46,7 +64,7 @@ travel-plan/
 ├── scripts/
 │   └── generate_pwa.py              # Excel → PWA 生成器
 ├── .github/workflows/
-│   └── deploy-pages.yml             # GitHub Pages 自动发布
+│   └── deploy.yml                   # 自动构建并按 DEPLOY_TARGET 发布
 ├── requirements.txt                 # Python 依赖
 └── README.md
 ```

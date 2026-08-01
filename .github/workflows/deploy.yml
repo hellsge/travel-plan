@@ -1,0 +1,80 @@
+name: Build and deploy travel PWA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - travel.xlsx
+      - scripts/generate_pwa.py
+      - requirements.txt
+      - .github/workflows/deploy.yml
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Generate travel PWA
+        run: python scripts/generate_pwa.py
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pwa-output
+          path: output
+          if-no-files-found: error
+
+  deploy-tencent:
+    needs: build
+    if: vars.DEPLOY_TARGET == 'tencent'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: pwa-output
+          path: output
+      - name: Deploy to Tencent CloudBase
+        env:
+          TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
+          TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
+          TENCENT_ENV_ID: ${{ secrets.TENCENT_ENV_ID }}
+        run: |
+          npm install -g @cloudbase/cli
+          tcb login --apiKeyId "$TENCENT_SECRET_ID" --apiKey "$TENCENT_SECRET_KEY"
+          tcb hosting deploy output -e "$TENCENT_ENV_ID"
+
+  deploy-pages:
+    needs: build
+    if: vars.DEPLOY_TARGET == 'github-pages'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: pwa-output
+          path: output
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Deploy Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
