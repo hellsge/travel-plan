@@ -376,6 +376,10 @@ def render_html(title: str, sheet_name: str, start_day: date | None, end_day: da
   }};
   markCurrentItem();setInterval(markCurrentItem,60000);
   const stickyOffset=()=>toolbar.offsetHeight+(parseFloat(getComputedStyle(toolbar).top)||0)+8;
+  if(!location.hash){{
+    const anchor=document.querySelector('.item.current,.item.next')||(current&&current.querySelector('.day-header'));
+    if(anchor){{const top=window.scrollY+anchor.getBoundingClientRect().top-stickyOffset();window.scrollTo({{top:Math.max(0,top),behavior:'smooth'}})}}
+  }}
   const syncActiveDay=()=>{{
     scrollFrame=0;if(scrollTarget)return;
     const visibleDays=days.filter(day=>!day.hidden);if(!visibleDays.length)return;
