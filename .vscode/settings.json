@@ -1,0 +1,10 @@
+{
+  "yaml.schemas": {
+    "./schema/trip.schema.json": "trips/*.yaml"
+  },
+  "yaml.completion": true,
+  "yaml.validate": true,
+  "[yaml]": {
+    "editor.quickSuggestions": { "other": true, "comments": false, "strings": true }
+  }
+}

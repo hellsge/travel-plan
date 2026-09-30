@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% from "_stats.html" import stats_panel %}
+{% block title %}{{ trip.title }} · 表格{% endblock %}
+{% block body_class %}table-page{% endblock %}
+{% block hero_links %}<nav class="hero-links"><a href="{{ root }}">← 全部旅行</a><a href="./">时间轴视图</a></nav>{% endblock %}
+{% block eyebrow %}{{ trip_id }}{% endblock %}
+{% block hero_extra %}<p class="date-range">{{ trip.start.isoformat() }} 至 {{ trip.end.isoformat() }}{% if trip.travelers %} · {{ trip.travelers }} 人{% endif %}</p>{% if trip.notes %}<p class="date-range">{{ trip.notes }}</p>{% endif %}{% endblock %}
+{% block content %}
+<main>
+<div class="table-wrap">
+<table class="trip-table">
+<thead><tr><th>日期</th><th>时间</th><th>类型</th><th>项目</th><th>备注</th><th class="num">消费</th><th>开售 / 预约</th><th>状态</th><th>地点</th></tr></thead>
+<tbody>
+{% for day in trip.days %}
+<tr class="day-row"><td colspan="5">{{ day.date.strftime('%m月%d日') }} · {{ day | day_label }}</td><td class="num">{{ stats.day_totals[day.date] | money }}</td><td colspan="3"></td></tr>
+{% for item in day.items %}
+<tr>
+<td class="nowrap">{{ day.date.strftime('%m-%d') }}</td>
+<td class="nowrap">{{ item.start or '待定' }}{% if item.end %}–{{ item.end }}{% endif %}</td>
+<td class="type-cell type-{{ item.type }}">{{ item.type }}</td>
+<td>{{ item.title }}</td>
+<td>{{ item.note or '' }}</td>
+<td class="num">{% if item.amount is not none %}{{ item.amount | money }}{% endif %}</td>
+<td class="nowrap">{% if item.booking_at %}{{ item.booking_at | booking }}{% endif %}</td>
+<td class="status-cell status-{{ item.status }}">{{ item.status }}</td>
+<td>{{ item.place or '' }}</td>
+</tr>
+{% endfor %}
+{% endfor %}
+</tbody>
+</table>
+</div>
+{{ stats_panel(stats, open=True) }}
+</main>
+{% endblock %}

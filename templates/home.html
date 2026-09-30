@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}旅行计划{% endblock %}
+{% block eyebrow %}共 {{ trips | length }} 次旅行{% endblock %}
+{% block content %}
+<main>
+<section id="featuredSection" hidden><h2 class="section-title">进行中 / 即将出发</h2><div id="featuredList" class="trip-list"></div></section>
+<h2 class="section-title">全部旅行</h2>
+<div id="tripList" class="trip-list">
+{% for entry in trips %}
+<a class="trip-card" href="{{ entry.id }}/" data-start="{{ entry.trip.start.isoformat() }}" data-end="{{ entry.trip.end.isoformat() }}">
+<span class="phase">{{ '已结束' }}</span>
+<h2>{{ entry.trip.title }}</h2>
+<div class="meta">{{ entry.trip.start.isoformat() }} 至 {{ entry.trip.end.isoformat() }} · {{ entry.day_count }} 天</div>
+<div class="figures"><span>总消费 <strong>{{ entry.stats.total | money }}</strong></span><span>待办 <strong>{{ entry.stats.todo_count }}</strong></span></div>
+</a>
+{% endfor %}
+</div>
+</main>
+{% endblock %}
+{% block scripts %}<script src="{{ root }}assets/home.js"></script>{% endblock %}

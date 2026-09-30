@@ -1,0 +1,473 @@
+title: 2026 盛夏 · 上海深圳香港昆明大理轻松旅行计划
+start: 2026-08-02
+end: 2026-08-08
+travelers: 2
+notes: 慢节奏原则：每天只安排 1–2 个核心区域；费用暂未填写，后续在 G/H 列补充后可自动汇总。
+days:
+  - date: 2026-08-02
+    label: 苏州→ 上海 → 深圳 → 香港
+    items:
+      - title: 起床
+        type: 日常
+        start: "06:20"
+        end: "06:50"
+      - title: 打车
+        type: 交通
+        start: "07:00"
+        end: "07:10"
+        note: 家 → 苏州园区
+        price: 10
+        qty: 1
+        place: 苏州园区站
+      - title: 高铁
+        type: 交通
+        start: "07:28"
+        end: "07:59"
+        note: G7503 苏州园区 → 上海虹桥
+        price: 38
+        qty: 2
+        booking_at: 2026-08-01
+        status: 已购买
+        place: 上海虹桥站
+      - title: 飞机
+        type: 交通
+        start: "09:50"
+        end: "12:20"
+        note: HO1883 上海虹桥 → 深圳宝安
+        price: 866
+        qty: 2
+        status: 已购买
+        place: 深圳宝安国际机场
+      - title: 地铁
+        type: 交通
+        start: "13:00"
+        end: "13:40"
+        note: 深圳宝安机场 → 福田站
+        price: 8
+        place: 福田火车站
+      - title: 高铁
+        type: 交通
+        start: "13:40"
+        end: "14:20"
+        note: 过关候车
+        qty: 1
+      - title: 高铁
+        type: 交通
+        start: "14:30"
+        end: "14:50"
+        note: 福田站 → 九龙
+        price: 68
+        qty: 2
+        booking_at: 2026-08-02 14:00
+        status: 待购买
+        place: 香港西九龙站
+      - title: 地铁
+        type: 交通
+        start: "15:00"
+        end: "15:20"
+        note: 九龙 → 酒店
+        price: 4
+        qty: 2
+      - title: 入住
+        type: 住宿
+        start: "15:30"
+        end: "15:40"
+        note: 都会海逸
+        price: 716.89
+        qty: 1
+        status: 已购买
+        place: 香港都会海逸酒店
+  - date: 2026-08-03
+    label: 香港 → 深圳 → 昆明
+    items:
+      - title: 起床
+        type: 日常
+        start: "08:00"
+        end: "08:20"
+      - title: 早餐
+        type: 餐饮
+        start: "08:30"
+        end: "09:00"
+      - title: 退房
+        type: 住宿
+        start: "10:50"
+        end: "11:00"
+      - title: 退房
+        type: 住宿
+        start: "14:40"
+        end: "14:50"
+        note: 拿行李
+      - title: 地铁
+        type: 交通
+        start: "14:50"
+        end: "15:10"
+        note: 酒店 → 西九龙
+        price: 4
+        qty: 2
+        place: 香港西九龙站
+      - title: 高铁
+        type: 交通
+        start: "15:27"
+        end: "15:41"
+        note: G5806 西九龙 → 福田
+        price: 68
+        qty: 2
+        status: 待购买
+        place: 福田站
+      - title: 地铁
+        type: 交通
+        start: "16:20"
+        end: "17:00"
+        note: 福田 → 深圳宝安机场
+        price: 8
+        qty: 2
+        place: 深圳宝安国际机场
+      - title: 飞机
+        type: 交通
+        start: "18:25"
+        end: "21:00"
+        note: CZ6923 深圳 → 昆明
+        price: 1110
+        qty: 2
+        status: 已购买
+        place: 昆明长水国际机场
+      - title: 地铁
+        type: 交通
+        start: "21:30"
+        end: "22:20"
+        note: 6号线 3号线 机场中心 东部汽车站 五一路 A口
+        price: 17
+      - title: 入住酒店
+        type: 住宿
+        start: "22:20"
+        end: "22:30"
+        note: 昆明南屏步行街老街桔子水晶酒店
+        price: 548.29
+        qty: 1
+        status: 已购买
+        place: 昆明南屏步行街老街桔子水晶酒店
+      - title: 附近简单晚餐 / 宵夜
+        type: 餐饮
+        start: "22:30"
+        end: "23:00"
+        note: 过桥米线、汽锅鸡任选；若航班延误可直接休息
+        price: 50
+        qty: 2
+  - date: 2026-08-04
+    label: 昆明 → 大理 · 洱海公园
+    items:
+      - title: 起床
+        type: 日常
+        start: "07:40"
+        end: "08:00"
+      - title: 早餐
+        type: 餐饮
+        start: "08:00"
+        end: "08:20"
+        note: 酒店早餐
+      - title: 打车
+        type: 交通
+        start: "08:20"
+        end: "08:40"
+        price: 15
+        qty: 1
+      - title: 翠湖公园慢走
+        type: 游览
+        start: "08:40"
+        end: "10:00"
+        note: 可顺路看云南陆军讲武堂外观；下雨则改为云南省博物馆
+        place: 翠湖公园
+      - title: 打车
+        type: 交通
+        start: "10:00"
+        end: "10:20"
+        price: 10
+        qty: 1
+      - title: 午餐
+        type: 餐饮
+        start: "10:20"
+        end: "12:00"
+        note: 昆明老街附近就餐，走回酒店
+      - title: 退房
+        type: 住宿
+        start: "12:00"
+        end: "12:00"
+        note: 休息后退房，延迟退房至15点
+      - title: 打车
+        type: 交通
+        start: "12:10"
+        end: "12:30"
+        note: 天气不好的话需要提前10分钟
+        place: 昆明站
+      - title: 高铁
+        type: 交通
+        start: "12:59"
+        end: "15:06"
+        note: D3939 昆明 → 大理
+        price: 145
+        qty: 2
+        status: 已购买
+        place: 大理站
+      - title: 打车
+        type: 交通
+        start: "15:10"
+        end: "15:30"
+        note: 大理站 → 酒店
+        price: 10
+      - title: 入住酒店
+        type: 住宿
+        start: "15:30"
+        end: "15:40"
+        note: 大理洱海天域英迪格
+        price: 1650
+        qty: 1
+        status: 已购买
+        place: 大理洱海天域英迪格酒店
+      - title: 休息
+        type: 日常
+        start: "15:40"
+        end: "17:00"
+        note: 酒店看海
+      - title: 洱海公园
+        type: 游览
+        start: "17:00"
+        end: "18:00"
+        note: 洱海散步
+        place: 洱海公园
+      - title: 晚餐
+        type: 餐饮
+        start: "18:00"
+        end: "19:00"
+        note: 附近吃特色晚餐
+      - title: 落日
+        type: 游览
+        start: "19:30"
+        end: "20:10"
+  - date: 2026-08-05
+    label: 大理 · 洱海西岸
+    items:
+      - title: 早午餐
+        type: 餐饮
+        start: "09:00"
+        end: "10:00"
+        note: 酒店早餐
+      - title: 退房
+        type: 住宿
+        start: "11:50"
+        end: "12:00"
+      - title: 前往酒店
+        type: 交通
+        start: "12:00"
+        end: "12:40"
+        note: 打车
+        price: 40
+        qty: 1
+        place: 大理古城三月街亚朵见野酒店
+      - title: 入住酒店
+        type: 住宿
+        start: "12:40"
+        end: "13:00"
+        note: 大理古城三月街亚朵见野
+        price: 989.5
+        qty: 2
+        status: 已购买
+        place: 大理古城三月街亚朵见野酒店
+      - title: 生态廊道
+        type: 游览
+        start: "14:00"
+        end: "18:00"
+        note: 只选一小段散步或骑行 5–8 公里，不环洱海；雨大则改咖啡馆休息；龙龛码头；才村码头
+        place: 大理洱海生态廊道
+      - title: 返回酒店
+        type: 交通
+        start: "16:30"
+        end: "17:30"
+        note: 返程约 40–60 分钟
+        place: 龙龛码头
+      - title: 晚餐与自由活动
+        type: 餐饮
+        start: "18:30"
+        end: "20:00"
+        note: 体力充足再逛古城；否则早点休息
+        place: 才村码头
+  - date: 2026-08-06
+    label: 大理 · 喜洲古镇 · 三塔
+    items:
+      - title: 起床
+        type: 日常
+        start: "08:00"
+        end: "08:30"
+      - title: 古城北门早市
+        type: 游览
+        start: "08:30"
+        end: "09:30"
+        note: 步行，逛吃，特色
+        price: 20
+        qty: 2
+      - title: 打车
+        type: 交通
+        start: "09:30"
+        end: "10:00"
+        note: 返程约 40–60 分钟
+        price: 40
+      - title: 喜洲古镇
+        type: 游览
+        start: "10:00"
+        end: "12:00"
+        note: 2小时左右
+        place: 喜洲古镇
+      - title: 廊桥
+        type: 游览
+        start: "12:00"
+        end: "13:00"
+        note: 回古城附近吃饭
+        place: 廊桥
+      - title: 打车
+        type: 交通
+        start: "13:00"
+        end: "13:30"
+        note: 回古城附近吃饭
+      - title: 午餐
+        type: 餐饮
+        start: "13:30"
+        end: "14:30"
+        price: 100
+        qty: 2
+      - title: 休息
+        type: 住宿
+        start: "14:30"
+        end: "15:30"
+        note: 大理古城三月街亚朵见野
+        status: 已购买
+        place: 大理古城三月街亚朵见野酒店
+      - title: 三塔
+        type: 游览
+        start: "15:40"
+        end: "17:10"
+        note: 崇圣寺三塔文化旅游区
+        price: 75
+        qty: 2
+        place: 崇圣寺三塔文化旅游区
+      - title: 古城逛街
+        type: 游览
+        start: "17:30"
+        end: "18:30"
+        note: 人民路、床单厂艺术区任选；以喝咖啡、逛小店为主
+      - title: 晚餐逛吃
+        type: 餐饮
+        start: "18:30"
+        end: "20:30"
+        note: 次日早去丽江，今晚尽量早休息
+      - title: 休息
+        type: 住宿
+        start: "21:00"
+        end: "21:00"
+        note: 大理古城三月街亚朵见野
+        status: 已购买
+        place: 大理古城三月街亚朵见野酒店
+  - date: 2026-08-07
+    label: 大理 · 苍山 · 古城火把节
+    items:
+      - title: 早餐
+        type: 餐饮
+        start: "09:00"
+        end: "10:00"
+        note: 自然醒，酒店早餐
+      - title: 打车
+        type: 交通
+        start: "10:00"
+        end: "10:20"
+        note: 去苍山
+        place: 苍山
+      - title: 苍山
+        type: 游览
+        start: "10:30"
+        end: "14:00"
+        note: 索道，徒步
+        price: 200
+        qty: 2
+      - title: 打车
+        type: 交通
+        start: "14:00"
+        end: "14:30"
+        note: 回酒店
+        place: 大理古城三月街亚朵见野酒店
+      - title: 午餐
+        type: 餐饮
+        start: "14:30"
+        end: "15:00"
+        note: 鸡豆凉粉、纳西烤肉等，按口味选择
+      - title: 休息退房
+        type: 住宿
+        start: "15:00"
+        end: "16:00"
+        note: 放行李
+      - title: 火把节
+        type: 游览
+        start: "16:00"
+        end: "20:30"
+        note: 三月街火把节
+        place: 三月街
+      - title: 打车
+        type: 交通
+        start: "20:30"
+        end: "21:10"
+        note: 拿行李，避开晚间拥堵，回酒店办理入住
+        place: 大理古城三月街亚朵见野酒店
+      - title: 入住酒店
+        type: 住宿
+        start: "21:10"
+        end: "21:20"
+        note: 大理洱海公园万达广场亚朵酒店
+        price: 601
+        qty: 1
+        status: 已购买
+        place: 大理洱海公园万达广场亚朵酒店
+  - date: 2026-08-08
+    label: 大理 → 南京 → 苏州
+    items:
+      - title: 早餐
+        type: 餐饮
+        start: "07:10"
+        end: "07:30"
+        note: 早起，来不及就打包两份早餐
+      - title: 打车
+        type: 交通
+        start: "07:30"
+        end: "08:00"
+        price: 25
+        qty: 1
+        place: 大理凤仪机场
+      - title: 飞机
+        type: 交通
+        start: "09:15"
+        end: "12:20"
+        note: MU9721 大理 南京
+        price: 1610
+        qty: 2
+        status: 已购买
+        place: 南京禄口机场
+      - title: 地铁
+        type: 交通
+        start: "12:50"
+        end: "13:30"
+        note: S1 号线
+        price: 4
+        qty: 2
+        place: 南京南站
+      - title: 高铁
+        type: 交通
+        start: "14:03"
+        end: "15:41"
+        note: G7521 南京南 苏州园区站
+        price: 117
+        qty: 2
+        place: 苏州园区站
+      - title: 打车
+        type: 交通
+        start: "15:50"
+        end: "16:00"
+        note: 无锡落地约 1–1.5 小时；上海落地通常约 2–3 小时，按实际机场调整
+        price: 10
+        qty: 1
+        place: 瑞华四季公寓

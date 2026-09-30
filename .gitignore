@@ -1,5 +1,5 @@
 __pycache__/
 *.py[cod]
-~$*.xlsx
+.pytest_cache/
 .DS_Store
 output/

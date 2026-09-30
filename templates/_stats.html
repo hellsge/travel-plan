@@ -1,0 +1,22 @@
+{% macro stats_panel(stats, open=False) -%}
+<details class="stats-panel"{% if open %} open{% endif %}>
+<summary>花销统计</summary>
+<div class="stats-body">
+<div class="stats-grid">
+<div><span>总额</span><strong>{{ stats.total | money }}</strong></div>
+<div><span>人均</span><strong>{{ stats.per_person | money if stats.per_person is not none else '—' }}</strong></div>
+<div><span>已付</span><strong>{{ stats.paid | money }}</strong></div>
+<div><span>待付</span><strong>{{ stats.unpaid | money }}</strong></div>
+</div>
+{% if stats.by_type %}
+<div class="type-bars">
+{% for kind, amount, ratio in stats.by_type %}
+<div class="type-bar type-{{ kind }}"><span class="label">{{ kind }}</span><span class="track"><span class="fill" style="width:{{ '%.1f' | format(ratio * 100) }}%"></span></span><span class="value">{{ amount | money }} · {{ '%.0f' | format(ratio * 100) }}%</span></div>
+{% endfor %}
+</div>
+{% else %}
+<p class="stats-empty">暂无消费记录</p>
+{% endif %}
+</div>
+</details>
+{%- endmacro %}

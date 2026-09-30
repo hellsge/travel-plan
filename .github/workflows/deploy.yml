@@ -4,9 +4,12 @@ on:
   push:
     branches: [main]
     paths:
-      - travel.xlsx
-      - scripts/generate_pwa.py
-      - requirements.txt
+      - trips/**
+      - scripts/**
+      - templates/**
+      - schema/**
+      - tests/**
+      - requirements*.txt
       - .github/workflows/deploy.yml
   workflow_dispatch:
 
@@ -25,10 +28,15 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
+          cache-dependency-path: requirements*.txt
       - name: Install dependencies
-        run: pip install -r requirements.txt
-      - name: Generate travel PWA
-        run: python scripts/generate_pwa.py
+        run: pip install -r requirements-dev.txt
+      - name: Validate trips
+        run: python scripts/generate_site.py --check
+      - name: Run tests
+        run: python -m pytest -q
+      - name: Generate site
+        run: python scripts/generate_site.py
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:

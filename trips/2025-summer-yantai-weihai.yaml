@@ -1,0 +1,116 @@
+title: 2025 暑期 · 烟台威海
+start: 2025-08-02
+end: 2025-08-09
+days:
+  - date: 2025-08-02
+    label: 苏州-济南
+    items:
+      - title: 起床
+        type: 日常
+        start: "05:55"
+        end: "06:35"
+      - title: 打车
+        type: 交通
+        start: "06:40"
+        end: "07:15"
+        note: 菁源-苏州北
+        price: 25
+        qty: 1
+      - title: 高铁
+        type: 交通
+        start: "07:35"
+        end: "10:54"
+        note: G230 苏州北-济南
+        price: 398
+        qty: 2
+        status: 已购买
+      - title: 打车
+        type: 交通
+        start: "11:10"
+        end: "11:35"
+        price: 30
+        qty: 1
+      - title: 酒店入住
+        type: 住宿
+        start: "11:40"
+        end: "12:00"
+        note: 桔子
+        price: 261.18
+        qty: 2
+        status: 已购买
+  - date: 2025-08-03
+    label: 济南
+    items: []
+  - date: 2025-08-04
+    label: 济南 烟台
+    items:
+      - title: 起床
+        type: 日常
+      - title: 打车
+        type: 交通
+        start: "10:00"
+        end: "10:35"
+      - title: 高铁
+        type: 交通
+        start: "11:07"
+        end: "13:30"
+        note: D8151济南东-烟台南
+        price: 167
+        qty: 2
+        status: 已购买
+      - title: 打车
+        type: 交通
+        price: 30
+      - title: 酒店入住
+        type: 住宿
+        note: 全季万达广场店
+        price: 398.03
+        qty: 1
+        status: 已购买
+      - title: 时光塔
+        type: 游览
+        note: 时光塔-步行800米到孤独的鲸
+      - title: 孤独的鲸
+        type: 游览
+        note: 步行1000米到天空之约-打车到恋烟台礼堂
+      - title: 天空之约
+        type: 游览
+        note: -步行800米后沙广场-打车到烟台山
+      - title: 恋烟台礼堂
+        type: 游览
+        note: 步行至朝阳街-所城里
+      - title: 晚餐
+        type: 餐饮
+        note: 点外卖或者路上随便
+  - date: 2025-08-05
+    label: 烟台 威海
+    items:
+      - title: 早餐
+        type: 餐饮
+        note: 酒店免费
+      - title: 东山栈桥
+        type: 游览
+      - title: 渔人码头
+        type: 游览
+      - title: 滨海中路
+        type: 游览
+      - title: 养马岛
+        type: 游览
+      - title: 高铁
+        type: 交通
+        price: 20
+        qty: 2
+      - title: 如家neo 威海昆明路威高广场幸福门店
+        type: 住宿
+        price: 328
+        qty: 2
+        status: 已购买
+  - date: 2025-08-06
+    label: 威海
+    items: []
+  - date: 2025-08-07
+    label: 威海 济南/泰安
+    items: []
+  - date: 2025-08-09
+    label: 济南
+    items: []

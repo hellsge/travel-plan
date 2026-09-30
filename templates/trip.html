@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% from "_stats.html" import stats_panel %}
+{% block title %}{{ trip.title }}{% endblock %}
+{% block hero_links %}<nav class="hero-links"><a href="{{ root }}">← 全部旅行</a><a href="table.html">表格视图</a></nav>{% endblock %}
+{% block eyebrow %}{{ trip_id }}{% endblock %}
+{% block hero_extra %}
+<p class="date-range">{{ trip.start.isoformat() }} 至 {{ trip.end.isoformat() }}</p>
+<div class="stats"><div class="stat"><span>预计总消费</span><strong>{{ stats.total | money }}</strong></div><div class="stat"><span>待处理事项</span><strong>{{ stats.todo_count }}</strong></div></div>
+{% endblock %}
+{% block content %}
+<nav class="toolbar"><div class="toolbar-inner"><div class="day-nav">
+{%- for day in trip.days %}<a href="#day-{{ day.date.isoformat() }}" data-day-link="{{ day.date.isoformat() }}"><b>{{ day.date.day }}</b><span>{{ day.date.month }}月</span></a>{% endfor -%}
+</div></div></nav>
+<main>
+{{ stats_panel(stats) }}
+{% for day in trip.days %}
+{% set day_todos = day.items | selectattr('is_todo') | rejectattr('status', 'equalto', '已取消') | list | length %}
+<section class="day" id="day-{{ day.date.isoformat() }}" data-date="{{ day.date.isoformat() }}">
+  <header class="day-header">
+    <div><span class="day-date">{{ day.date.strftime('%m月%d日') }}</span><h2>{{ day | day_label }}</h2></div>
+    <div class="day-summary"><strong>{{ stats.day_totals[day.date] | money }}</strong><span>{{ day.items | length }} 项{% if day_todos %} · {{ day_todos }} 待办{% endif %}</span></div>
+  </header>
+  <div class="timeline">
+  {%- for item in day.items %}
+    <article class="item type-{{ item.type }}{% if item.is_todo %} todo{% endif %}" data-todo="{{ 1 if item.is_todo else 0 }}" data-start="{{ day.date.isoformat() }}T{{ item.start or '' }}" data-end="{{ item | end_attr(day) }}">
+      <div class="time">
+      {%- if not item.start %}<span class="t">待定</span>
+      {%- elif not item.end %}<span class="t">{{ item.start }}</span>
+      {%- else %}<span class="t">{{ item.start }}</span><span class="sep">↓</span><span class="t">{{ item.end }}</span>{% endif -%}
+      </div>
+      <div class="item-body">
+        <div class="item-heading"><span class="type">{{ item.type }}</span><h3>{{ item.title }}</h3></div>
+        {%- if item.note %}<div class="note">{{ item.note }}</div>{% endif %}
+        {%- if item.booking_at %}<div class="booking">⏰ 开售 / 预约：{{ item.booking_at | booking }}</div>{% endif %}
+        {%- if item.amount is not none %}<div class="cost">{% if item.price is not none and item.qty is not none %}<span class="price-detail">{{ item.price | money }} × {{ item.qty | qty }}</span>{% endif %}<strong>{{ item.amount | money }}</strong></div>{% endif %}
+        {%- if item.place %}<div class="location">📍 {{ item.place }}</div>{% endif %}
+        <div class="item-footer"><span class="status status-{{ item.status }}">{{ item.status }}</span><button type="button" class="copy-item" data-copy="{{ item | copy_text(day) }}">复制事项</button>
+        {%- if item.place %}<div class="actions"><button type="button" class="map-open" data-location="{{ item.place }}">打开地图</button><button type="button" class="copy" data-copy="{{ item.place }}">复制地点</button></div>{% endif %}</div>
+      </div>
+    </article>
+  {%- endfor %}
+  </div>
+</section>
+{% endfor %}
+</main>
+<dialog id="mapDialog" class="map-dialog"><div class="map-panel"><h2>选择地图</h2><p id="mapPlace" class="map-place"></p><div class="map-options"><button type="button" data-map="amap">高德地图</button><button type="button" data-map="apple">Apple 地图</button><button type="button" data-map="baidu">百度地图</button></div><button id="mapClose" class="map-close" type="button">取消</button></div></dialog>
+{% endblock %}
+{% block scripts %}<script src="{{ root }}assets/timeline.js"></script>{% endblock %}

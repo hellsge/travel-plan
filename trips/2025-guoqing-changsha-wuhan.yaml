@@ -1,0 +1,59 @@
+title: 2025 国庆 · 长沙武汉
+start: 2025-09-30
+end: 2025-10-05
+days:
+  - date: 2025-09-30
+    label: 苏州-长沙-酒店---酒店
+    items:
+      - title: 起床
+        type: 日常
+        start: "07:00"
+        end: "07:45"
+      - title: 打车
+        type: 交通
+        start: "07:50"
+        end: "08:15"
+        note: 菁源-苏州北
+        price: 40
+        qty: 1
+      - title: 高铁
+        type: 交通
+        start: "08:51"
+        end: "15:27"
+        note: G586/G1377 苏州北-长沙南；抢票：9月16日（提前14天）
+        price: 516
+        qty: 2
+      - title: 地铁
+        type: 交通
+        start: "15:40"
+        end: "16:10"
+        note: 2好像 长沙南-五一广场
+        price: 4
+        qty: 2
+      - title: 酒店入住
+        type: 住宿
+        start: "16:20"
+        end: "17:00"
+        note: 桔子水晶
+        price: 778
+        qty: 3
+        status: 已购买
+  - date: 2025-10-01
+    label: 长沙
+    items: []
+  - date: 2025-10-02
+    label: 长沙-酒店---酒店
+    items:
+      - title: 酒店入住
+        type: 住宿
+        price: 572.667
+        qty: 3
+  - date: 2025-10-03
+    label: 长沙-武汉-酒店---酒店
+    items: []
+  - date: 2025-10-04
+    label: 酒店---酒店
+    items: []
+  - date: 2025-10-05
+    label: 酒店---酒店
+    items: []

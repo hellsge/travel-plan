@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN" data-root="{{ root }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="旅行计划">
+<link rel="manifest" href="{{ root }}manifest.webmanifest">
+<link rel="icon" href="{{ root }}icons/icon-192.png">
+<link rel="apple-touch-icon" href="{{ root }}icons/apple-touch-icon.png">
+<link rel="stylesheet" href="{{ root }}assets/app.css">
+<title>{% block title %}{% endblock %}</title>
+</head>
+<body class="{% block body_class %}{% endblock %}">
+<header class="hero"><div class="hero-inner">
+{% block hero_links %}{% endblock %}
+<p class="eyebrow">{% block eyebrow %}{% endblock %}</p>
+<div class="hero-title"><h1>{{ self.title() }}</h1><button id="themeToggle" class="theme-toggle" type="button" aria-label="切换浅色/深色模式" title="切换浅色/深色模式">🌙</button></div>
+{% block hero_extra %}{% endblock %}
+</div></header>
+{% block content %}{% endblock %}
+<footer>{% block footer %}由 trips/*.yaml 自动生成；请修改 YAML 后重新生成。{% endblock %}</footer>
+<div id="offlineBadge" class="offline-badge" hidden>当前离线</div>
+<script src="{{ root }}assets/common.js"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

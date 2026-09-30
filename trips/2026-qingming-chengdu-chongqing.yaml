@@ -1,0 +1,147 @@
+title: 2026 清明 · 成都重庆旅行计划
+start: 2026-04-02
+end: 2026-04-06
+travelers: 2
+notes: 按执行时间自上而下阅读；蓝色行表示每天的行程分段，黄色状态表示仍需处理。
+days:
+  - date: 2026-04-02
+    label: 苏州-上海-成都
+    items:
+      - title: 打车
+        type: 交通
+        start: "18:30"
+        end: "19:00"
+        note: 家-苏州北
+        qty: 1
+      - title: 高铁
+        type: 交通
+        start: "19:28"
+        end: "19:50"
+        note: G739 苏州北-上海虹桥
+        price: 45
+        qty: 2
+        booking_at: 2026-03-19
+        status: 已购买
+      - title: 飞机
+        type: 交通
+        start: "21:00"
+        end: "23:55"
+        note: MU5447 虹桥-双流
+        price: 610.95
+        qty: 2
+        status: 已购买
+      - title: 入住
+        type: 住宿
+        note: 汉庭春熙路步行街酒店
+        price: 272.91
+        qty: 1
+        status: 已购买
+  - date: 2026-04-03
+    label: 成都
+    items:
+      - title: 起床
+        type: 日常
+        start: "07:00"
+      - title: 打车
+        type: 交通
+        start: "08:00"
+        end: "08:30"
+      - title: 成都大熊猫繁育基地
+        type: 游览
+        start: "08:30"
+        end: "13:30"
+        note: 南门自定义路线
+        price: 55
+        qty: 2
+        status: 已购买
+      - title: 观光车
+        type: 交通
+      - title: 午饭
+        type: 餐饮
+      - title: 入住
+        type: 住宿
+        start: "14:30"
+        note: 成都富力丽思卡尔顿酒店
+        price: 862
+        qty: 1
+        status: 已购买
+      - title: 成都博物馆
+        type: 游览
+        start: "15:00"
+        end: "17:00"
+        note: 9:00 - 20:30，20:00停止入园
+        booking_at: 2026-04-03 14:00
+        status: 待预约
+      - title: 太古里
+        type: 游览
+        start: "17:30"
+      - title: 晚饭
+        type: 餐饮
+      - title: IFS
+        type: 游览
+      - title: 酒店
+        type: 住宿
+        status: 待购买
+  - date: 2026-04-04
+    label: 成都-重庆
+    items:
+      - title: 起床
+        type: 日常
+        start: "07:30"
+        end: "08:00"
+      - title: 早餐
+        type: 餐饮
+        start: "08:00"
+        end: "08:30"
+        note: 豪华自助
+        status: 已购买
+      - title: 公交车
+        type: 交通
+        note: 55路
+      - title: 武侯祠
+        type: 游览
+        note: 9:00 - 18:00，17:00 停止入园
+      - title: 杜甫草堂
+        type: 游览
+        note: 9:00 - 18:00，17:30 停止入园
+      - title: 宽窄巷子
+        type: 游览
+      - title: 午餐
+        type: 餐饮
+      - title: 文殊院
+        type: 游览
+        note: 9:00 - 17:00，16:30 停止入园
+      - title: 高铁
+        type: 交通
+        note: 成都东 - 沙坪坝
+        status: 待购买
+      - title: 入住
+        type: 住宿
+        note: 重庆解放碑步行街城际酒店
+        cost: 612.89
+        status: 已购买
+  - date: 2026-04-05
+    label: 重庆
+    items:
+      - title: 酒店
+        type: 住宿
+        note: 重庆解放碑步行街城际酒店
+        cost: 572.51
+        status: 已购买
+  - date: 2026-04-06
+    label: 重庆-无锡-苏州
+    items:
+      - title: check out
+        type: 住宿
+      - title: 飞机
+        type: 交通
+        start: "17:55"
+        end: "20:10"
+        note: 江北-硕放
+        price: 1411
+        qty: 2
+        status: 已购买
+      - title: 高铁
+        type: 交通
+        booking_at: 2026-03-23
+        status: 待预约
