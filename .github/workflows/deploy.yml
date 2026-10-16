@@ -33,6 +33,8 @@ jobs:
         run: pip install -r requirements-dev.txt
       - name: Validate trips
         run: python scripts/generate_site.py --check
+      - name: Check yaml and xlsx in sync
+        run: python scripts/trip_xlsx.py sync --check
       - name: Run tests
         run: python -m pytest -q
       - name: Generate site

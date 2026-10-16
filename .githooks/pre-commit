@@ -1,0 +1,26 @@
+#!/bin/sh
+# 提交前同步 trips/ 下的 YAML 与 xlsx，并把 sync 写过的文件加入本次提交。
+# 启用：git config core.hooksPath .githooks
+
+# Git Bash 下 Python 的 stdout 默认是 gbk，中文报错会乱码。
+export PYTHONIOENCODING=utf-8
+
+cd "$(git rev-parse --show-toplevel)" || exit 1
+
+written=$(python scripts/trip_xlsx.py sync --print-written)
+status=$?
+if [ "$status" -ne 0 ]; then
+    echo "pre-commit: trip sync 失败，已中止提交；处理上面的错误后重试" >&2
+    exit 1
+fi
+# Windows 上 Python 输出 \r\n，$(...) 只去掉 \n。
+written=$(printf '%s\n' "$written" | tr -d '\r')
+
+if [ -n "$written" ]; then
+    # sync 只写合法 id 的文件，路径不含空白，可以直接按词切分。
+    # shellcheck disable=SC2086
+    git add -- $written || exit 1
+    echo "pre-commit: sync 写入并加入本次提交："
+    # shellcheck disable=SC2086
+    printf '  %s\n' $written
+fi

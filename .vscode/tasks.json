@@ -1,0 +1,24 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Trip sync watch",
+      "type": "process",
+      "command": "python",
+      "args": ["scripts/trip_xlsx.py", "sync", "--watch"],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": { "PYTHONIOENCODING": "utf-8", "PYTHONUNBUFFERED": "1" }
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": false
+      },
+      "runOptions": { "runOn": "folderOpen" }
+    }
+  ]
+}
